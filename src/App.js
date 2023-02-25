@@ -1,35 +1,36 @@
 import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
-
-const arr = [
-  {
-    tittle: "Мужские Кроссовки Nike Blazer Mid Suede",
-    price: "12 999 грн.",
-    ImgUrl: "/img/sneakers/1.jpg",
-  },
-  {
-    tittle: "Мужские Кроссовки Nike Air Max 270",
-    price: "10 999 грн.",
-    ImgUrl: "/img/sneakers/2.jpg",
-  },
-  {
-    tittle: "Мужские Кроссовки Nike Blazer Mid Suede",
-    price: "8 499 грн.",
-    ImgUrl: "/img/sneakers/3.jpg",
-  },
-  {
-    tittle: "Кроссовки Puma X Aka Boku Future Rider",
-    price: "8 999 грн.",
-    ImgUrl: "/img/sneakers/4.jpg",
-  },
-];
+import React from "react";
 
 function App() {
+  const [items, setItems] = React.useState([]);
+  const [basketItems, setBasketItems] = React.useState([]);
+  const [basketOpened, setBasketOpened] = React.useState(false);
+
+  //BACK-END
+  React.useEffect(() => {
+    fetch("https://63ebd5e732a081172392d745.mockapi.io/items")
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setItems(json);
+      });
+  }, []);
+
+
+  const onAddtoBasket = (obj) => {
+    setBasketItems(prev => [...prev,obj])
+  }
+  
+
   return (
     <div className="wrapper clear">
-      <Drawer />
-      <Header />
+      {basketOpened && (
+        <Drawer items={basketItems} onClose={() => setBasketOpened(false)} />
+      )}
+      <Header onClickBasket={() => setBasketOpened(true)} />
       <main>
         <div className="main_inner p-40">
           <div className="tittle_blocks mb-40 d-flex align-center justify-between">
@@ -40,9 +41,9 @@ function App() {
             </div>
           </div>
 
-          <div className="d-flex justify-between">
-            {arr.map((obj) => (
-              <Card tittle={obj.tittle} price={obj.price} ImgUrl={obj.ImgUrl} />
+          <div className="d-flex justify-between flex-wrap">
+            {items.map((items) => (
+              <Card tittle={items.tittle} price={items.price} imgUrl={items.imgUrl} onPlus={(obj) => onAddtoBasket(obj)}/>
             ))}
           </div>
         </div>

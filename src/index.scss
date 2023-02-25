@@ -59,6 +59,15 @@ header{
     overflow: auto;
     margin-bottom: 40px;
   }
+
+  .drawer_test{
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat:no-repeat;
+    margin-right: 20px;
+    background-position: 0 -7px;
+  }
 }
 
 .drawer_wrapper{

@@ -4,6 +4,7 @@
   border: 1px solid #f3f3f3;
   border-radius: 40px;
   margin-right: 30px;
+  margin-bottom: 35px;
   transition: box-shadow 0.2s ease-in-out,transform 0.2s ease-in-out;
 
   &:hover{
@@ -11,7 +12,7 @@
     transform: translateY(-5px);
   }
 
-  .favorite{
+  .unlike{
     position: absolute;
     cursor: pointer;
   }

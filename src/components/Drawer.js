@@ -1,52 +1,42 @@
-function Drawer() {
+function Drawer({onClose,items = []}) {
   return (
-    <div style={{ display: "none" }} className="drawer_wrapper">
+    <div className="drawer_wrapper">
       <div className="drawer">
         <h2 className="d-flex  justify-between">
           Корзина{" "}
-          <img
+          <img onClick={onClose}
             className="drawer_add cu-p"
             width={32}
             height={32}
-            src="/img/drawer/draw_add.svg"
+            src="/img/drawer/drawer_close.svg"
             alt="loose"
           />{" "}
         </h2>
 
         <div className="drawer_item">
-          <div className="drawer_inner">
-            <div className="drawer_img d-flex justify-between align-center pr-30">
-              <img src="/img/drawer/draw_1.svg" alt="loose" />
-              <img
-                className="drawer_add mt-20"
-                width={32}
-                height={32}
-                src="/img/drawer/draw_add.svg"
-                alt="loose"
-              />
+          {items.map((obj) => (
+             <div className="drawer_inner">
+               <div className="drawer_img d-flex justify-between align-center pr-30">
+                    <div style={{backgroundImage:`url(${obj.imgUrl})`}} className="drawer_test">
+
+                    </div>
+                    <img
+                      className="drawer_add mb-5"
+                      width={32}
+                      height={32}
+                      src="/img/drawer/drawer_close.svg"
+                      alt="loose"
+                    />
+                 </div>
+                <div className="drawer_info">
+                  <p className="mb-5">{obj.tittle}</p>
+                  <b>{obj.price}</b>
+                </div>
             </div>
-            <div className="drawer_info">
-              <p className="mb-5">Мужские Кроссовки Nike Air Max 270</p>
-              <b>12 999 грн</b>
-            </div>
-          </div>
-          <div className="drawer_inner">
-            <div className="drawer_img d-flex justify-between align-center pr-30">
-              <img src="/img/drawer/draw_2.svg" alt="loose" />
-              <img
-                className="drawer_add mt-20"
-                width={32}
-                height={32}
-                src="/img/drawer/draw_add.svg"
-                alt="loose"
-              />
-            </div>
-            <div className="drawer_info">
-              <p className="mb-5">Кроссовки Puma X Aka Boku Future Rider</p>
-              <b>8 499 грн</b>
-            </div>
-          </div>
+          ))}
         </div>
+
+
         <div className="drawer_total">
           <ul>
             <li className="d-flex mb-15">
